@@ -2,8 +2,9 @@ package com.mauri.preciecito.V1.controllers;
 
 import com.mauri.preciecito.V1.models.Product;
 import com.mauri.preciecito.V1.repository.ProductRepository;
+import com.mauri.preciecito.V1.services.BasicCanasta;
 import com.mauri.preciecito.V1.services.ExtractDataService;
-import com.mauri.preciecito.V1.services.ShowDataService;
+import jakarta.persistence.Basic;
 import org.hibernate.query.Page;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,32 +24,32 @@ public class PricesController {
     private WebDriver driver;
     @Autowired
     private ExtractDataService extractDataService;
-    private final ShowDataService showDataService;
     private final ProductRepository productRepository;
+    private final BasicCanasta basicCanasta;
 
-    public PricesController(WebDriver driver, ExtractDataService extractDataService, ShowDataService showDataService, ProductRepository productRepository) {
+    public PricesController(WebDriver driver, ExtractDataService extractDataService, ProductRepository productRepository, BasicCanasta basicCanasta) {
         this.driver = driver;
         this.extractDataService = extractDataService;
-        this.showDataService = showDataService;
         this.productRepository = productRepository;
+        this.basicCanasta = basicCanasta;
     }
 
-    @GetMapping("/tang")
+    @GetMapping("/u/tang")
     public ResponseEntity<Map<String, Float>> extractTang() {
-        return extractDataService.extractTang();
+        return basicCanasta.extractTang();
     }
 
-    @GetMapping("/cuadrado")
+    @GetMapping("/u/cuadrado")
     public ResponseEntity<Map<String, Float>> extractCuadrado() {
-        return extractDataService.extractCuadrado();
+        return basicCanasta.extractCuadrado();
     }
 
-    @GetMapping("/cocucha")
+    @GetMapping("/u/cocucha")
     public ResponseEntity<Map<String, Float>> extractCocucha() {
-        return extractDataService.extractCocucha();
+        return basicCanasta.extractCocucha();
     }
 
-    @GetMapping("/latest/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<Product> getRandomProductByName(@PathVariable String name) {
         List<Product> products = productRepository.findByNameOrderByDateDesc(name);
 
