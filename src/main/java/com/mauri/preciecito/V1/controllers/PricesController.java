@@ -38,7 +38,6 @@ public class PricesController {
         return extractDataService.extractTang();
     }
 
-
     @GetMapping("/cuadrado")
     public ResponseEntity<Map<String, Float>> extractCuadrado() {
         return extractDataService.extractCuadrado();
@@ -49,7 +48,7 @@ public class PricesController {
         return extractDataService.extractCocucha();
     }
 
-    @GetMapping("/random/{name}")
+    @GetMapping("/latest/{name}")
     public ResponseEntity<Product> getRandomProductByName(@PathVariable String name) {
         List<Product> products = productRepository.findByNameOrderByDateDesc(name);
 
