@@ -134,7 +134,7 @@ public class ExtractDataService {
         return ScrapElementGeneric(url, css);
     }
     public ResponseEntity<String> extractCarrefour(String url) {
-        final String css = "//span[@class='valtech-carrefourar-product-price-0-x-currencyContainer']//span[@class='valtech-carrefourar-product-price-0-x-currencyInteger']";
+        final String css = "//span[@class='valtech-carrefourar-product-price-0-x-sellingPriceValue']/span[@class='valtech-carrefourar-product-price-0-x-currencyContainer']/span[@class='valtech-carrefourar-product-price-0-x-currencyInteger']";
 
         return ScrapElementsCarrefour(url, css);
     }
@@ -205,7 +205,6 @@ public class ExtractDataService {
 
         return ResponseEntity.ok(result);
     }
-
 
 
 

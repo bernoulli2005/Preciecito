@@ -34,21 +34,45 @@ public class PricesController {
         this.basicCanasta = basicCanasta;
     }
 
+    /////////////
     @GetMapping("/u/tang")
     public ResponseEntity<Map<String, Float>> extractTang() {
         return basicCanasta.extractTang();
     }
-
     @GetMapping("/u/cuadrado")
     public ResponseEntity<Map<String, Float>> extractCuadrado() {
         return basicCanasta.extractCuadrado();
     }
-
     @GetMapping("/u/cocucha")
     public ResponseEntity<Map<String, Float>> extractCocucha() {
         return basicCanasta.extractCocucha();
     }
+    @GetMapping("/u/zanahoria")
+    public ResponseEntity<Map<String, Float>> extractZanahoria() {
+        return basicCanasta.extractZanahoria();
+    }
 
+    @GetMapping("/u/tallarin")
+    public ResponseEntity<Map<String, Float>> extractTallarin() {
+        return basicCanasta.extractTallarin();
+    }
+
+    @GetMapping("/u/arroz")
+    public ResponseEntity<Map<String, Float>> extractArroz() {
+        return basicCanasta.extractArroz();
+    }
+
+    @GetMapping("/u/cremoso")
+    public ResponseEntity<Map<String, Float>> extractCremoso() {
+        return basicCanasta.extractCremoso();
+    }
+
+    @GetMapping("/u/puredetomate")
+    public ResponseEntity<Map<String, Float>> extractPureDeTomate() {
+        return basicCanasta.extractPureDeTomate();
+    }
+
+    /////////////
     @GetMapping("/{name}")
     public ResponseEntity<Product> getRandomProductByName(@PathVariable String name) {
         List<Product> products = productRepository.findByNameOrderByDateDesc(name);
