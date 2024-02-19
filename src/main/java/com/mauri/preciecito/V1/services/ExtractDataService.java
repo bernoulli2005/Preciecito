@@ -249,7 +249,7 @@ public class ExtractDataService {
         String carrefourPrice = extractCarrefour("https://www.carrefour.com.ar/gaseosa-coca-cola-sabor-original-225-l/p").getBody();
 
 
-        Product product = createAndSaveProduct("tang", discoPrice, veaPrice, carrefourPrice, cordiezPrice);
+        Product product = createAndSaveProduct("cocucha", discoPrice, veaPrice, carrefourPrice, cordiezPrice);
 
         Map<String, Float> result = new HashMap<>();
         result.put("Carrefour", product.getPriceCarrefour());

@@ -1,15 +1,19 @@
 package com.mauri.preciecito.V1.controllers;
 
 import com.mauri.preciecito.V1.models.Product;
+import com.mauri.preciecito.V1.repository.ProductRepository;
 import com.mauri.preciecito.V1.services.ExtractDataService;
 import com.mauri.preciecito.V1.services.ShowDataService;
+import org.hibernate.query.Page;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,11 +24,13 @@ public class PricesController {
     @Autowired
     private ExtractDataService extractDataService;
     private final ShowDataService showDataService;
+    private final ProductRepository productRepository;
 
-    public PricesController(WebDriver driver, ExtractDataService extractDataService, ShowDataService showDataService) {
+    public PricesController(WebDriver driver, ExtractDataService extractDataService, ShowDataService showDataService, ProductRepository productRepository) {
         this.driver = driver;
         this.extractDataService = extractDataService;
         this.showDataService = showDataService;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("/tang")
@@ -43,11 +49,18 @@ public class PricesController {
         return extractDataService.extractCocucha();
     }
 
-    @GetMapping("/latest/{name}")
-    public Product getLatestProduct(@PathVariable String name) {
-        return ShowDataService.findLatestProductByName(name);
-    }
+    @GetMapping("/random/{name}")
+    public ResponseEntity<Product> getRandomProductByName(@PathVariable String name) {
+        List<Product> products = productRepository.findByNameOrderByDateDesc(name);
 
+        if (products.isEmpty()) {
+            // Return 404 Not Found if no matching products are found
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Return the latest product based on date
+        return new ResponseEntity<>(products.get(0), HttpStatus.OK);
+    }
 
 }
 

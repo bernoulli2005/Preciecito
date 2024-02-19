@@ -23,14 +23,8 @@ public class Product {
     private Float priceVea;
     @Column(name = "preciocordiez")
     private Float priceCordiez;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha y hora")
     private Date date;
-
-    ///@ManyToOne
-    //@JoinColumn(name = "/superid")
-    //private Supermarket supermarket;
-
 
 }
