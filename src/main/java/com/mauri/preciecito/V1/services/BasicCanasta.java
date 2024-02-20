@@ -87,6 +87,15 @@ public class BasicCanasta {
                 "cremoso");
     }
 
+    public ResponseEntity<Map<String, Float>> extractPaty() {
+        return extractDataService.ScrapExtractSave(
+                "https://www.cordiez.com.ar/hamburguesas-paty-expres/p " ,
+                "https://www.disco.com.ar/queso-cremoso-punta-del-agua/p",
+                "https://www.vea.com.ar/queso-cremoso-la-paulina-1-4-hma-minimo-1-kg-mayorista/p",
+                "https://www.carrefour.com.ar/queso-cuartirolo-tremblay-x-kg/p",
+                "cremoso");
+    }
+
 
 
 
